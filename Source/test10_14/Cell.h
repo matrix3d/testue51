@@ -4,21 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "MyActor.generated.h"
+#include "Cell.generated.h"
 
 UCLASS()
-class TEST10_14_API AMyActor : public AActor
+class TEST10_14_API ACell : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	UPROPERTY(VisibleAnywhere)
+		UPROPERTY(VisibleAnywhere)
 		UStaticMeshComponent* VisualMesh;
-	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
-		void CppPrint();
-
-	AMyActor();
+	ACell();
 
 protected:
 	// Called when the game starts or when spawned

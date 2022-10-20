@@ -1,12 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-//添加mesh，并旋转
 
-#include "MyActor.h"
+
+#include "Cell.h"
 
 // Sets default values
-AMyActor::AMyActor()
+ACell::ACell()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bCanEverTick = true;
 	VisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	VisualMesh->SetupAttachment(RootComponent);
@@ -17,32 +18,21 @@ AMyActor::AMyActor()
 	{
 		VisualMesh->SetStaticMesh(CubeVisualAsset.Object);
 		VisualMesh->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
+		VisualMesh->SetRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
 	}
 }
 
 // Called when the game starts or when spawned
-void AMyActor::BeginPlay()
+void ACell::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-// cpp文件中定义函数
-void AMyActor::CppPrint()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Test BP Callable C++ Func!")));
-}
-
 // Called every frame
-void AMyActor::Tick(float DeltaTime)
+void ACell::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	FRotator v = GetActorRotation();
-	v.Yaw += DeltaTime * 300.0f;
-	v.Pitch += DeltaTime * 20.0f;
-	SetActorRotation(v);
 
-	UE_LOG(LogTemp, Warning, TEXT("fdsfd_ %f"),DeltaTime);
-	//GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Green, FString::Printf(TEXT("fdsfd%s"),DeltaTime));
 }
 
