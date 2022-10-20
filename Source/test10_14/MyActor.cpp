@@ -35,5 +35,8 @@ void AMyActor::Tick(float DeltaTime)
 	v.Yaw += DeltaTime * 300.0f;
 	v.Pitch += DeltaTime * 20.0f;
 	SetActorRotation(v);
+
+	UE_LOG(LogTemp, Warning, TEXT("fdsfd_ %f"),DeltaTime);
+	//GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Green, FString::Printf(TEXT("fdsfd%s"),DeltaTime));
 }
 
