@@ -10,22 +10,24 @@ AGameActor::AGameActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	//for (int i = 0;i < texturesLen;i++) {
-		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%s.0_%s"), i + 1);
-		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_3.0_3"));
-		//textures[i] = materialVisualAsset.Object;
+	//	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%s.0_%s"), i + 1);
+	//	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_3.0_3"));
+	//	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_%d.0_%d"), i+1);
+	//	//textures[0] = materialVisualAsset1.Object;
+	//	textures[i] = materialVisualAsset1.Object;
 
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("fdsfd%s"), materialVisualAsset.Succeeded()));
+	//	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("fdsfd%s"), materialVisualAsset.Succeeded()));
 	//}
 
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_1.0_1"));
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_%d.0_%d"),1);
 	textures[0] = materialVisualAsset1.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset2(TEXT("/Game/yangmaterial/0_2.0_2"));
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset2(TEXT("/Game/yangmaterial/0_%d.0_%d"),2);
 	textures[1] = materialVisualAsset2.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset3(TEXT("/Game/yangmaterial/0_3.0_3"));
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset3(TEXT("/Game/yangmaterial/0_%d.0_%d"),3);
 	textures[2] = materialVisualAsset3.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset4(TEXT("/Game/yangmaterial/0_4.0_4"));
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset4(TEXT("/Game/yangmaterial/0_%d.0_%d"),4);
 	textures[3] = materialVisualAsset4.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset5(TEXT("/Game/yangmaterial/0_5.0_5"));
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset5(TEXT("/Game/yangmaterial/0_%d.0_%d"),5);
 	textures[4] = materialVisualAsset5.Object;
 	
 }
@@ -35,6 +37,30 @@ void AGameActor::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+bool AGameActor::downExistBox(int layer, int row, int col)
+{
+	if (layer == 0)
+	{
+		return true;
+	}
+	for (int i = -1; i <= 1; i++)
+	{
+		for (int j = -1; j <= 1; j++)
+		{
+			int l = layer - 1;
+			int r = row + i;
+			int c = col + j;
+
+			
+			if (r >= 0 && c >= 0 && r < numRows && c < numCols && data[l][r][c] != null)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 // cpp文件中定义函数
@@ -99,9 +125,9 @@ void AGameActor::ReStart()
 					//cell.texture = textures[v];
 					cell->setValue( v,textures[v]);
 
-					//cell->layer = i;
-					//cell.row = j;
-					//cell.col = k;
+					cell->layer = i;
+					cell->row = j;
+					cell->col = k;
 					//cell.OnClick.AddListener(() = > {
 					//	if (fail)
 					//	{
@@ -121,7 +147,7 @@ void AGameActor::ReStart()
 					//		//ui.Show(true, false);
 					//	}
 					//});
-					//data[i, j, k] = cell;
+					data[i][j][k] = cell;
 				}
 
 			}

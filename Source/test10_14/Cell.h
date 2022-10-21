@@ -15,6 +15,9 @@ public:
 	// Sets default values for this actor's properties
 		UPROPERTY(VisibleAnywhere)
 		UStaticMeshComponent* VisualMesh;
+		 int layer;
+		 int row;
+		 int col;
 		int value;
 
 	ACell();
