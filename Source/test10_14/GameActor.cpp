@@ -9,7 +9,25 @@ AGameActor::AGameActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	//for (int i = 0;i < texturesLen;i++) {
+		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%s.0_%s"), i + 1);
+		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_3.0_3"));
+		//textures[i] = materialVisualAsset.Object;
 
+		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("fdsfd%s"), materialVisualAsset.Succeeded()));
+	//}
+
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_1.0_1"));
+	textures[0] = materialVisualAsset1.Object;
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset2(TEXT("/Game/yangmaterial/0_2.0_2"));
+	textures[1] = materialVisualAsset2.Object;
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset3(TEXT("/Game/yangmaterial/0_3.0_3"));
+	textures[2] = materialVisualAsset3.Object;
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset4(TEXT("/Game/yangmaterial/0_4.0_4"));
+	textures[3] = materialVisualAsset4.Object;
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset5(TEXT("/Game/yangmaterial/0_5.0_5"));
+	textures[4] = materialVisualAsset5.Object;
+	
 }
 
 // Called when the game starts or when spawned
@@ -72,16 +90,16 @@ void AGameActor::ReStart()
 					FVector SpawnLocation = FVector(((float)k - numCols / 2) * size, i * sizeL, ((float)j - numRows / 2) * size);
 					FRotator SpawnRotation = GetActorRotation();
 
-					GetWorld()->SpawnActor<ACell>(SpawnLocation, SpawnRotation);
 
 					//var cube = Instantiate(cubePrefabs[0].gameObject, new Vector3(((float)k - numCols / 2) * size, i * sizeL, ((float)j - numRows / 2) * size), Quaternion.identity, gameObject.transform);
 					count++;
+					ACell* cell= GetWorld()->SpawnActor<ACell>(SpawnLocation, SpawnRotation);
 					//var cell = cube.GetComponent<Cell>();
-					//var v = Random.Range(0, textures.Length);
+					int v = FMath::FRandRange(0, texturesLen);
 					//cell.texture = textures[v];
-					//cell.Value = v;
+					cell->setValue( v,textures[v]);
 
-					//cell.layer = i;
+					//cell->layer = i;
 					//cell.row = j;
 					//cell.col = k;
 					//cell.OnClick.AddListener(() = > {

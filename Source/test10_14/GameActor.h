@@ -12,7 +12,8 @@ class TEST10_14_API AGameActor : public AActor
 	GENERATED_BODY()
 	
 public:	
-	//public Texture[] textures;
+	int texturesLen=5;
+	UMaterial* textures[5];
 	//public Cell[] cubePrefabs;
 	int numLayers = 20;
 	int numRows = 10;

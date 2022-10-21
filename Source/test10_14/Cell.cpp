@@ -36,3 +36,18 @@ void ACell::Tick(float DeltaTime)
 
 }
 
+void ACell::setValue(int v,UMaterial* material)
+{
+	value = v;
+
+	//const FString a = FString::Printf(TEXT("/Game/yangmaterial/0_%i.NewMaterial"), v + 1);
+	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%i.NewMaterial"), v + 1);
+	//Material'/Game/yangmaterial/0_5.0_5'
+	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%i.0_%i"), v + 1, v + 1);
+	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_5.0_5"));
+	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_.NewMaterial"));
+	//static ConstructorHelpers::FObjectFinder<UTexture2D> textureVisualAsset(TEXT("/Game/yangimage/166384773226240_25.166384773226240_25"));
+	//material = materialVisualAsset.Object;
+	//material->Settexture//
+	VisualMesh->SetMaterial(0, material);
+}

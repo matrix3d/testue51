@@ -15,6 +15,8 @@ public:
 	// Sets default values for this actor's properties
 		UPROPERTY(VisibleAnywhere)
 		UStaticMeshComponent* VisualMesh;
+		int value;
+
 	ACell();
 
 protected:
@@ -24,5 +26,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual void setValue(int value,UMaterial* material);
 
 };
