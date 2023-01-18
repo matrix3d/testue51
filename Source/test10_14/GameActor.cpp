@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "GameActor.h"
@@ -54,7 +54,7 @@ bool AGameActor::downExistBox(int layer, int row, int col)
 			int c = col + j;
 
 			
-			if (r >= 0 && c >= 0 && r < numRows && c < numCols && data[l][r][c] != null)
+			if (r >= 0 && c >= 0 && r < numRows && c < numCols && data[l][r][c] != NULL)
 			{
 				return true;
 			}
@@ -63,7 +63,7 @@ bool AGameActor::downExistBox(int layer, int row, int col)
 	return false;
 }
 
-// cppÎÄ¼þÖÐ¶¨Òåº¯Êý
+// cppæ–‡ä»¶ä¸­å®šä¹‰å‡½æ•°
 void AGameActor::ReStart()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("ReStart")));
@@ -143,7 +143,7 @@ void AGameActor::ReStart()
 					//	count--;
 					//	if (count <= 0 && !fail)
 					//	{
-					//		//print("Í¨¹Ø");
+					//		//print("é€šå…³");
 					//		//ui.Show(true, false);
 					//	}
 					//});
