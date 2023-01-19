@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Cell.h"
@@ -49,5 +49,7 @@ void ACell::setValue(int v,UMaterial* material)
 	//static ConstructorHelpers::FObjectFinder<UTexture2D> textureVisualAsset(TEXT("/Game/yangimage/166384773226240_25.166384773226240_25"));
 	//material = materialVisualAsset.Object;
 	//material->Settexture//
+	//FString str= material->GetPathName();
+	//UE_LOG(LogTemp, Warning, TEXT("fdsfd_ %b"), material==NULL);
 	VisualMesh->SetMaterial(0, material);
 }
