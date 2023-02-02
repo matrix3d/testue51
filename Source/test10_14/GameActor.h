@@ -24,7 +24,7 @@ public:
 	//public Transform bar;
 	bool fail = false;
 
-	//List<Cell> cellsOnBar;
+	TArray<ACell> cellsOnBar;
 	//public GameUI ui;
 
 
@@ -45,5 +45,6 @@ public:
 	virtual void OnClick(ACell* cell);
 	virtual void updateAllCell();
 	virtual void addCellToBar(ACell* cell);
+	virtual void updateCell(int layer, int row, int col);
 
 };

@@ -82,28 +82,10 @@ void AGameActor::ReStart()
 	{
 		cell.transform.DOKill();
 		Destroy(cell.gameObject);
-	}
+	}*/
 
-	cellsOnBar = new List<Cell>();
-	if (data != null)
-	{
-		for (var i = 0; i < numLayers; i++)
-		{
-			for (var j = 0; j < numRows; j++)
-			{
-				for (var k = 0; k < numCols; k++)
-				{
-					var cell = data[i, j, k];
-					if (cell != null)
-					{
-						cell.transform.DOKill();
-						Destroy(cell.gameObject);
-					}
-				}
-			}
-		}
-	}
-	data = new Cell[numLayers, numRows, numCols];*/
+	//cellsOnBar.ini
+
 	for (int i = 0; i < numLayers; i++)
 	{
 		for (int j = 0; j < numRows; j++)
@@ -141,7 +123,7 @@ void AGameActor::ReStart()
 			}
 		}
 	}
-	//updateAllCell();
+	updateAllCell();
 }
 
 // Called every frame
@@ -174,8 +156,102 @@ void AGameActor::OnClick(ACell* cell) {
 	}
 }
 void AGameActor::updateAllCell() {
+	for (int i = 0; i < numLayers; i++)
+	{
+		for (int j = 0; j < numRows; j++)
+		{
+			for (int k = 0; k < numCols; k++)
+			{
+				ACell* v = data[i][j][k];
+				if (v != NULL)
+				{
+					updateCell(i, j, k);
+				}
+			}
+		}
+	}
 }
 void AGameActor::addCellToBar(ACell* cell) {
 	cell->Destroy();
+
+	/*var added = false;
+	cell.transform.localEulerAngles = new Vector3(-90, 0, 0);
+	cell.transform.localPosition = new Vector3(8 * 2 + 1, 0, 0);
+	for (var i = 0; i < cellsOnBar.Count; i++) {
+		var c = cellsOnBar[i];
+		if (c.Value == cell.Value)
+		{
+			if (i < cellsOnBar.Count - 1)
+			{
+				if (cellsOnBar[i + 1].Value == cell.Value)
+				{
+					var a = cellsOnBar[i].gameObject;
+					var b = cellsOnBar[i + 1].gameObject;
+					cellsOnBar.RemoveRange(i, 2);
+					var ce = cell.gameObject;
+					ce.transform.DOLocalMoveX(b.transform.localPosition.x + 2, .5f).onComplete = () = > {
+						Destroy(a);
+						Destroy(b);
+						Destroy(ce);
+						OneShotAudio.playOneShot("166384774687269");
+					};
+				}
+				else
+				{
+					cellsOnBar.Insert(i + 1, cell);
+				}
+				added = true;
+			}
+			break;
+		}
+	}
+	if (!added) {
+		cellsOnBar.Add(cell);
+	}
+	cell.transform.SetParent(bar.transform, false);
+	cell.mouseEnabled = false;
+	cell.setAlpha(false);
+
+	updateCellOnBar();
+	if (cellsOnBar.Count >= 7)
+	{
+		print("Ê§°Ü");
+		ui.Show(false, true);
+		fail = true;
+	}*/
+}
+
+void AGameActor::updateCell(int layer, int row, int col) {
+	if (layer < 0 || !(row >= 0 && col >= 0 && row < numRows && col < numCols))
+	{
+		return;
+	}
+
+	bool e = true;
+	if (layer < numLayers - 1)
+	{
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++)
+			{
+				int l = layer + 1;
+				int r = row + i;
+				int c = col + j;
+				if (r >= 0 && c >= 0 && r < numRows && c < numCols && data[l, r, c] != NULL)
+				{
+					e = false; break;
+				}
+			}
+			if (!e)
+			{
+				break;
+			}
+		}
+	}
+
+	ACell* obj = data[layer][row][col];
+	if (obj != NULL)
+	{
+		//obj.mouseEnabled = e;
+	}
 }
 
