@@ -42,6 +42,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual bool downExistBox(int layer, int row, int col);
 	UFUNCTION()
-	virtual void OnClick();
+	virtual void OnClick(ACell* cell);
+	virtual void updateAllCell();
+	virtual void addCellToBar(ACell* cell);
 
 };

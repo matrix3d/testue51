@@ -134,27 +134,7 @@ void AGameActor::ReStart()
 					//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("1112")));
 					FScriptDelegate onClickFun;
 					onClickFun.BindUFunction(this, FName("OnClick"));
-					cell->OnClicked.Add(onClickFun);
-
-					//cell.OnClick.AddListener(() = > {
-					//	if (fail)
-					//	{
-					//		return;
-					//	}
-
-					//	OneShotAudio.playOneShot("166384774385063");
-					//	print("onclick" + cell.layer + "," + cell.row + "," + cell.col);
-					//	data[cell.layer, cell.row, cell.col] = null;
-					//	updateAllCell();
-					//	addCellToBar(cell);
-
-					//	count--;
-					//	if (count <= 0 && !fail)
-					//	{
-					//		//print("通关");
-					//		//ui.Show(true, false);
-					//	}
-					//});
+					cell->OnClicked.AddUnique(onClickFun);
 					data[i][j][k] = cell;
 				}
 
@@ -171,8 +151,31 @@ void AGameActor::Tick(float DeltaTime)
 
 }
 
-void AGameActor::OnClick() {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("111")));
+void AGameActor::OnClick(ACell* cell) {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("111%d,%d,%d"),cell->row, cell->col,cell->layer));
 	UE_LOG(LogTemp,Warning,TEXT("click"));
+
+	if (fail)
+	{
+		return;
+	}
+
+	//	OneShotAudio.playOneShot("166384774385063");
+	//	print("onclick" + cell.layer + "," + cell.row + "," + cell.col);
+	data[cell->row][cell->col][cell->layer] = NULL;
+	updateAllCell();
+	addCellToBar(cell);
+
+	count--;
+	if (count <= 0 && !fail)
+	{
+			//print("通关");
+			//ui.Show(true, false);
+	}
+}
+void AGameActor::updateAllCell() {
+}
+void AGameActor::addCellToBar(ACell* cell) {
+	cell->Destroy();
 }
 
