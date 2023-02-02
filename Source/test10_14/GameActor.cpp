@@ -9,25 +9,27 @@ AGameActor::AGameActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	//for (int i = 0;i < texturesLen;i++) {
-	//	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%s.0_%s"), i + 1);
-	//	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_3.0_3"));
-	//	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_%d.0_%d"), i+1);
-	//	//textures[0] = materialVisualAsset1.Object;
-	//	textures[i] = materialVisualAsset1.Object;
+	for (int i = 0;i < texturesLen;i++) {
+		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%s.0_%s"), i + 1);
+		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_3.0_3"));
+		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_%d.0_%d"), i+1);
+		//textures[0] = materialVisualAsset1.Object;
+		//textures[i] = materialVisualAsset1.Object;
+
+		/*static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_%d.0_%d"), i+1);
+		textures[i] = materialVisualAsset1.Object;*/
 
 	//	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("fdsfd%s"), materialVisualAsset.Succeeded()));
-	//}
-
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_%d.0_%d"),1);
+	}
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_1.0_1"));
 	textures[0] = materialVisualAsset1.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset2(TEXT("/Game/yangmaterial/0_%d.0_%d"),2);
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset2(TEXT("/Game/yangmaterial/0_2.0_2"));
 	textures[1] = materialVisualAsset2.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset3(TEXT("/Game/yangmaterial/0_%d.0_%d"),3);
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset3(TEXT("/Game/yangmaterial/0_3.0_3"));
 	textures[2] = materialVisualAsset3.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset4(TEXT("/Game/yangmaterial/0_%d.0_%d"),4);
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset4(TEXT("/Game/yangmaterial/0_4.0_4"));
 	textures[3] = materialVisualAsset4.Object;
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset5(TEXT("/Game/yangmaterial/0_%d.0_%d"),5);
+	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset5(TEXT("/Game/yangmaterial/0_5.0_5"));
 	textures[4] = materialVisualAsset5.Object;
 	
 }
@@ -128,6 +130,12 @@ void AGameActor::ReStart()
 					cell->layer = i;
 					cell->row = j;
 					cell->col = k;
+
+					//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("1112")));
+					FScriptDelegate onClickFun;
+					onClickFun.BindUFunction(this, FName("OnClick"));
+					cell->OnClicked.Add(onClickFun);
+
 					//cell.OnClick.AddListener(() = > {
 					//	if (fail)
 					//	{
@@ -161,5 +169,10 @@ void AGameActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AGameActor::OnClick() {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("111")));
+	UE_LOG(LogTemp,Warning,TEXT("click"));
 }
 

@@ -2,15 +2,22 @@
 
 
 #include "Cell.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 ACell::ACell()
 {
+	/*USphereComponent* SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
+	RootComponent = SphereComponent;
+	SphereComponent->InitSphereRadius(40.0f);
+	SphereComponent->SetCollisionProfileName(TEXT("Pawn"));*/
+
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bCanEverTick = true;
 	VisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	VisualMesh->SetupAttachment(RootComponent);
+	
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube"));
 
