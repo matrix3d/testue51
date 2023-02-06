@@ -19,12 +19,17 @@ public:
 	int numLayers = 20;
 	int numRows = 10;
 	int numCols = 10;
-	ACell* data[20][10][10];//layer,x,y
+	//ACell* data[20][10][10];//layer,x,y
+	TArray<ACell*> data;//layer,x,y
 	int count;
 	//public Transform bar;
 	bool fail = false;
 
-	TArray<ACell> cellsOnBar;
+<<<<<<< HEAD
+	TArray<ACell*> cellsOnBar;
+=======
+	//List<Cell> cellsOnBar;
+>>>>>>> parent of 72904e7 (2)
 	//public GameUI ui;
 
 
@@ -45,6 +50,11 @@ public:
 	virtual void OnClick(ACell* cell);
 	virtual void updateAllCell();
 	virtual void addCellToBar(ACell* cell);
+<<<<<<< HEAD
 	virtual void updateCell(int layer, int row, int col);
+	virtual void setData(int layer, int row, int col,ACell* cell);
+	virtual ACell* getData(int layer, int row, int col);
+=======
+>>>>>>> parent of 72904e7 (2)
 
 };

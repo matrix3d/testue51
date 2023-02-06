@@ -1,9 +1,9 @@
-
+﻿
 
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
-#include "test10_14.h"
 #include "test10_14GameModeBase.h"
+#include "test10_14.h"
 
 void Atest10_14GameModeBase::BeginPlay()
 {

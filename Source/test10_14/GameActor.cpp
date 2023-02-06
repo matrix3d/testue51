@@ -7,6 +7,7 @@
 // Sets default values
 AGameActor::AGameActor()
 {
+	data.Init(NULL, numRows * numCols * numLayers);
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	for (int i = 0;i < texturesLen;i++) {
@@ -56,7 +57,7 @@ bool AGameActor::downExistBox(int layer, int row, int col)
 			int c = col + j;
 
 			
-			if (r >= 0 && c >= 0 && r < numRows && c < numCols && data[l][r][c] != NULL)
+			if (r >= 0 && c >= 0 && r < numRows && c < numCols && getData(l,r,c) != NULL)
 			{
 				return true;
 			}
@@ -82,17 +83,35 @@ void AGameActor::ReStart()
 	{
 		cell.transform.DOKill();
 		Destroy(cell.gameObject);
-	}*/
+	}
 
-	//cellsOnBar.ini
-
+	cellsOnBar = new List<Cell>();
+	if (data != null)
+	{
+		for (var i = 0; i < numLayers; i++)
+		{
+			for (var j = 0; j < numRows; j++)
+			{
+				for (var k = 0; k < numCols; k++)
+				{
+					var cell = data[i, j, k];
+					if (cell != null)
+					{
+						cell.transform.DOKill();
+						Destroy(cell.gameObject);
+					}
+				}
+			}
+		}
+	}
+	data = new Cell[numLayers, numRows, numCols];*/
 	for (int i = 0; i < numLayers; i++)
 	{
 		for (int j = 0; j < numRows; j++)
 		{
 			for (int k = 0; k < numCols; k++)
 			{
-				if (FMath::SRand() < 0.5f && i % 2 == j % 2 && i % 2 == k % 2/* && downExistBox(i, j, k)*/)
+				if (FMath::SRand() < 0.5f && i % 2 == j % 2 && i % 2 == k % 2 && downExistBox(i, j, k))
 				{
 					int size = 1;
 					float sizeL = 1.0f;
@@ -117,13 +136,13 @@ void AGameActor::ReStart()
 					FScriptDelegate onClickFun;
 					onClickFun.BindUFunction(this, FName("OnClick"));
 					cell->OnClicked.AddUnique(onClickFun);
-					data[i][j][k] = cell;
+					setData(i,j,k,cell);
 				}
 
 			}
 		}
 	}
-	updateAllCell();
+	//updateAllCell();
 }
 
 // Called every frame
@@ -144,7 +163,7 @@ void AGameActor::OnClick(ACell* cell) {
 
 	//	OneShotAudio.playOneShot("166384774385063");
 	//	print("onclick" + cell.layer + "," + cell.row + "," + cell.col);
-	data[cell->row][cell->col][cell->layer] = NULL;
+	setData(cell->row,cell->col,cell->layer,NULL);
 	updateAllCell();
 	addCellToBar(cell);
 
@@ -156,13 +175,14 @@ void AGameActor::OnClick(ACell* cell) {
 	}
 }
 void AGameActor::updateAllCell() {
+<<<<<<< HEAD
 	for (int i = 0; i < numLayers; i++)
 	{
 		for (int j = 0; j < numRows; j++)
 		{
 			for (int k = 0; k < numCols; k++)
 			{
-				ACell* v = data[i][j][k];
+				ACell* v = getData(i,j,k);
 				if (v != NULL)
 				{
 					updateCell(i, j, k);
@@ -172,12 +192,13 @@ void AGameActor::updateAllCell() {
 	}
 }
 void AGameActor::addCellToBar(ACell* cell) {
-	cell->Destroy();
+	//cell->Destroy();
 
-	/*var added = false;
-	cell.transform.localEulerAngles = new Vector3(-90, 0, 0);
-	cell.transform.localPosition = new Vector3(8 * 2 + 1, 0, 0);
-	for (var i = 0; i < cellsOnBar.Count; i++) {
+	bool added = false;
+	FVector loca=FVector(8 * 2 + 1, 0, 0);
+	FQuat rot;
+	cell->SetActorLocationAndRotation(loca,rot,false);
+	/*for (int i = 0; i < cellsOnBar.Count; i++) {
 		var c = cellsOnBar[i];
 		if (c.Value == cell.Value)
 		{
@@ -236,7 +257,7 @@ void AGameActor::updateCell(int layer, int row, int col) {
 				int l = layer + 1;
 				int r = row + i;
 				int c = col + j;
-				if (r >= 0 && c >= 0 && r < numRows && c < numCols && data[l, r, c] != NULL)
+				if (r >= 0 && c >= 0 && r < numRows && c < numCols && getData(l,r,c) != NULL)
 				{
 					e = false; break;
 				}
@@ -248,10 +269,22 @@ void AGameActor::updateCell(int layer, int row, int col) {
 		}
 	}
 
-	ACell* obj = data[layer][row][col];
+	ACell* obj = getData(layer,row,col);
 	if (obj != NULL)
 	{
 		//obj.mouseEnabled = e;
 	}
+=======
+}
+void AGameActor::addCellToBar(ACell* cell) {
+	cell->Destroy();
+>>>>>>> parent of 72904e7 (2)
+}
+
+void AGameActor::setData(int layer, int row, int col, ACell* cell) {
+	data[layer * numRows * numCols + row * numCols + col] = cell;
+}
+ACell* AGameActor::getData(int layer, int row, int col) {
+	return data[layer * numRows * numCols + row * numCols + col];
 }
 
