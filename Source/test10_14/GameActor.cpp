@@ -197,28 +197,28 @@ void AGameActor::addCellToBar(ACell* cell) {
 	FVector loca=FVector(8 * 2 + 1, 0, 0);
 	FQuat rot;
 	cell->SetActorLocationAndRotation(loca,rot,false);
-	/*for (int i = 0; i < cellsOnBar.Count; i++) {
-		var c = cellsOnBar[i];
-		if (c.Value == cell.Value)
+	for (int i = 0; i < cellsOnBar.Num(); i++) {
+		ACell* c = cellsOnBar[i];
+		if (c->value == cell->value)
 		{
-			if (i < cellsOnBar.Count - 1)
+			if (i < cellsOnBar.Num() - 1)
 			{
-				if (cellsOnBar[i + 1].Value == cell.Value)
+				if (cellsOnBar[i + 1]->value == cell->value)
 				{
-					var a = cellsOnBar[i].gameObject;
-					var b = cellsOnBar[i + 1].gameObject;
-					cellsOnBar.RemoveRange(i, 2);
-					var ce = cell.gameObject;
+					//var a = cellsOnBar[i].gameObject;
+					//var b = cellsOnBar[i + 1].gameObject;
+					cellsOnBar.RemoveAt(i, 2);
+					/*var ce = cell.gameObject;
 					ce.transform.DOLocalMoveX(b.transform.localPosition.x + 2, .5f).onComplete = () = > {
 						Destroy(a);
 						Destroy(b);
 						Destroy(ce);
 						OneShotAudio.playOneShot("166384774687269");
-					};
+					};*/
 				}
 				else
 				{
-					cellsOnBar.Insert(i + 1, cell);
+					cellsOnBar.Insert( cell, i + 1);
 				}
 				added = true;
 			}
@@ -228,17 +228,27 @@ void AGameActor::addCellToBar(ACell* cell) {
 	if (!added) {
 		cellsOnBar.Add(cell);
 	}
-	cell.transform.SetParent(bar.transform, false);
+	/*cell.transform.SetParent(bar.transform, false);
 	cell.mouseEnabled = false;
-	cell.setAlpha(false);
+	cell.setAlpha(false);*/
 
-	updateCellOnBar();
-	if (cellsOnBar.Count >= 7)
+	//updateCellOnBar();
+	
+	FString str;
+	for (ACell* var : cellsOnBar)
 	{
-		print("Ê§°Ü");
-		ui.Show(false, true);
+		str.Append("%d,", var->value);
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, str);
+
+
+	if (cellsOnBar.Num() >= 7)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("失败")));
+		//print("Ê§°Ü");
+		//ui.Show(false, true);
 		fail = true;
-	}*/
+	}
 }
 
 void AGameActor::updateCell(int layer, int row, int col) {
