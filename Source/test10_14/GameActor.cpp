@@ -175,7 +175,6 @@ void AGameActor::OnClick(ACell* cell) {
 	}
 }
 void AGameActor::updateAllCell() {
-<<<<<<< HEAD
 	for (int i = 0; i < numLayers; i++)
 	{
 		for (int j = 0; j < numRows; j++)
@@ -274,11 +273,6 @@ void AGameActor::updateCell(int layer, int row, int col) {
 	{
 		//obj.mouseEnabled = e;
 	}
-=======
-}
-void AGameActor::addCellToBar(ACell* cell) {
-	cell->Destroy();
->>>>>>> parent of 72904e7 (2)
 }
 
 void AGameActor::setData(int layer, int row, int col, ACell* cell) {

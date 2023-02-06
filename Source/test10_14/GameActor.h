@@ -25,11 +25,7 @@ public:
 	//public Transform bar;
 	bool fail = false;
 
-<<<<<<< HEAD
 	TArray<ACell*> cellsOnBar;
-=======
-	//List<Cell> cellsOnBar;
->>>>>>> parent of 72904e7 (2)
 	//public GameUI ui;
 
 
@@ -50,11 +46,8 @@ public:
 	virtual void OnClick(ACell* cell);
 	virtual void updateAllCell();
 	virtual void addCellToBar(ACell* cell);
-<<<<<<< HEAD
 	virtual void updateCell(int layer, int row, int col);
 	virtual void setData(int layer, int row, int col,ACell* cell);
 	virtual ACell* getData(int layer, int row, int col);
-=======
->>>>>>> parent of 72904e7 (2)
 
 };
