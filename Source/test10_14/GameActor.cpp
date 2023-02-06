@@ -237,7 +237,7 @@ void AGameActor::addCellToBar(ACell* cell) {
 	FString str;
 	for (ACell* var : cellsOnBar)
 	{
-		str.Append("%d,", var->value);
+		str.Append(FString::Printf(TEXT("%d,"),var->value));
 	}
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, str);
 
