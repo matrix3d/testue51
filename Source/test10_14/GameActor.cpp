@@ -227,6 +227,11 @@ void AGameActor::addCellToBar(ACell* cell) {
 	}
 	if (!added) {
 		cellsOnBar.Add(cell);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event0")));
+		onaddCellToBar.Broadcast();//.ExecuteIfBound();
+		//onaddCellToBar.ExecuteIfBound();
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event1")));
 	}
 	/*cell.transform.SetParent(bar.transform, false);
 	cell.mouseEnabled = false;

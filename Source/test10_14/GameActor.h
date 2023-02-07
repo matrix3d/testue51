@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "GameActor.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FONAddCellToBar);
 UCLASS()
 class TEST10_14_API AGameActor : public AActor
 {
@@ -26,11 +27,11 @@ public:
 	bool fail = false;
 
 	TArray<ACell*> cellsOnBar;
+
+	UPROPERTY(BlueprintAssignable)
+	FONAddCellToBar onaddCellToBar;
 	//public GameUI ui;
 
-
-	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
-		void ReStart();
 	// Sets default values for this actor's properties
 	AGameActor();
 
@@ -39,15 +40,20 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+
+	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
+		virtual	void ReStart();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual bool downExistBox(int layer, int row, int col);
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
 	virtual void OnClick(ACell* cell);
 	virtual void updateAllCell();
+	//UFUNCTION(BlueprintImplementableEvent, Category = "BPFunc_Lib")
 	virtual void addCellToBar(ACell* cell);
 	virtual void updateCell(int layer, int row, int col);
 	virtual void setData(int layer, int row, int col,ACell* cell);
 	virtual ACell* getData(int layer, int row, int col);
+	//UPROPERTY(Category = "BPFunc_Lib")
 
 };
