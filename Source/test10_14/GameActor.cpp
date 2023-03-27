@@ -235,9 +235,6 @@ void AGameActor::addCellToBar(ACell* cell) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event1")));
 	}
 	onaddCellToBar.Broadcast();
-	/*cell.transform.SetParent(bar.transform, false);
-	cell.mouseEnabled = false;
-	cell.setAlpha(false);*/
 
 	//updateCellOnBar();
 	
