@@ -73,3 +73,5 @@ Plugins/*/Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 *.ipch
+/.vscode
+/test10_14.code-workspace
