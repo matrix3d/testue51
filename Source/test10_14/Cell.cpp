@@ -46,7 +46,7 @@ void ACell::Tick(float DeltaTime)
 void ACell::setValue(int v,UMaterial* material)
 {
 	value = v;
-
+	mymaterial=material;
 	//const FString a = FString::Printf(TEXT("/Game/yangmaterial/0_%i.NewMaterial"), v + 1);
 	//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%i.NewMaterial"), v + 1);
 	//Material'/Game/yangmaterial/0_5.0_5'
@@ -59,4 +59,40 @@ void ACell::setValue(int v,UMaterial* material)
 	//FString str= material->GetPathName();
 	//UE_LOG(LogTemp, Warning, TEXT("fdsfd_ %b"), material==NULL);
 	VisualMesh->SetMaterial(0, material);
+}
+
+UTexture2D* ACell::GetTextureFromMaterial()
+{
+	UMaterial* Material = mymaterial; // 指向UMaterial的指针
+	UTexture2D* Texture = nullptr;
+
+	//Material->GetExpressions
+	for (int i = 0; i < Material->GetExpressions().Num(); i++)
+	{
+		UMaterialExpressionTextureSample* TextureExpression = Cast<UMaterialExpressionTextureSample>(Material->GetExpressions()[i]);
+		if (TextureExpression)
+		{
+			return Cast<UTexture2D>(TextureExpression->Texture);
+			break;
+		}
+	}
+	return nullptr;
+ 	/* if (mymaterial)
+    {
+        TArray<UTexture*> Textures;
+        mymaterial->GetUsedTextures(Textures,EMaterialQualityLevel::High, true,ERHIFeatureLevel::SM5,true);
+
+        if (Textures.Num() > 0)
+        {
+            return Textures[0];
+        }
+    }
+
+    return nullptr; */
+}
+
+
+UMaterial* ACell::GetMyMaterial()
+{
+    return mymaterial;
 }

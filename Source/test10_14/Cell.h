@@ -19,6 +19,8 @@ public:
 		 int row;
 		 int col;
 		int value;
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BPFunc_Lib")
+		UMaterial* mymaterial;
 
 	ACell();
 
@@ -30,5 +32,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void setValue(int value,UMaterial* material);
+	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
+	virtual	UTexture2D* GetTextureFromMaterial();
+	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
+	virtual	UMaterial* GetMyMaterial();
 
 };

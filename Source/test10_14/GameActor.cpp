@@ -158,6 +158,7 @@ void AGameActor::OnClick(ACell* cell) {
 
 	if (fail)
 	{
+		UE_LOG(LogTemp,Warning,TEXT("fail return"));
 		return;
 	}
 
@@ -194,7 +195,7 @@ void AGameActor::addCellToBar(ACell* cell) {
 	//cell->Destroy();
 
 	bool added = false;
-	FVector loca=FVector(8 * 2 + 1, 0, 0);
+	FVector loca=FVector(cellsOnBar.Num(), 0, 0);
 	FQuat rot;
 	cell->SetActorLocationAndRotation(loca,rot,false);
 	for (int i = 0; i < cellsOnBar.Num(); i++) {
@@ -228,11 +229,12 @@ void AGameActor::addCellToBar(ACell* cell) {
 	if (!added) {
 		cellsOnBar.Add(cell);
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event0")));
-		onaddCellToBar.Broadcast();//.ExecuteIfBound();
+		//.ExecuteIfBound();
 		//onaddCellToBar.ExecuteIfBound();
 
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event1")));
 	}
+	onaddCellToBar.Broadcast();
 	/*cell.transform.SetParent(bar.transform, false);
 	cell.mouseEnabled = false;
 	cell.setAlpha(false);*/
@@ -297,3 +299,10 @@ ACell* AGameActor::getData(int layer, int row, int col) {
 	return data[layer * numRows * numCols + row * numCols + col];
 }
 
+ACell*  AGameActor::GetMycellsOnBar(int i)
+{
+	if(i<cellsOnBar.Num()){
+		return cellsOnBar[i];
+	}
+    return nullptr;
+}

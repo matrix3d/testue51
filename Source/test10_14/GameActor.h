@@ -26,6 +26,7 @@ public:
 	//public Transform bar;
 	bool fail = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BPFunc_Lib")
 	TArray<ACell*> cellsOnBar;
 
 	UPROPERTY(BlueprintAssignable)
@@ -55,5 +56,6 @@ public:
 	virtual void setData(int layer, int row, int col,ACell* cell);
 	virtual ACell* getData(int layer, int row, int col);
 	//UPROPERTY(Category = "BPFunc_Lib")
-
+	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
+	virtual	ACell* GetMycellsOnBar(int i);
 };
