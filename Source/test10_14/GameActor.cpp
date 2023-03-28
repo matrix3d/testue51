@@ -10,7 +10,7 @@ AGameActor::AGameActor()
 	data.Init(NULL, numRows * numCols * numLayers);
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	for (int i = 0;i < texturesLen;i++) {
+	//for (int i = 0;i < texturesLen;i++) {
 		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_%s.0_%s"), i + 1);
 		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset(TEXT("/Game/yangmaterial/0_3.0_3"));
 		//static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_%d.0_%d"), i+1);
@@ -21,8 +21,8 @@ AGameActor::AGameActor()
 		textures[i] = materialVisualAsset1.Object;*/
 
 	//	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("fdsfd%s"), materialVisualAsset.Succeeded()));
-	}
-	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_1.0_1"));
+	//}
+	/* static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset1(TEXT("/Game/yangmaterial/0_1.0_1"));
 	textures[0] = materialVisualAsset1.Object;
 	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset2(TEXT("/Game/yangmaterial/0_2.0_2"));
 	textures[1] = materialVisualAsset2.Object;
@@ -31,7 +31,28 @@ AGameActor::AGameActor()
 	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset4(TEXT("/Game/yangmaterial/0_4.0_4"));
 	textures[3] = materialVisualAsset4.Object;
 	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset5(TEXT("/Game/yangmaterial/0_5.0_5"));
-	textures[4] = materialVisualAsset5.Object;
+	textures[4] = materialVisualAsset5.Object; */
+
+	/* for(int i=0; i<5; i++){
+		FString path = FString::Printf(TEXT("/Game/yangmaterial/0_%d.0_%d"), i+1, i+1);
+		FName materialPath(*path);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, path);
+		static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset (*materialPath);
+		textures[i] = materialVisualAsset.Object;
+	} */
+
+	for (int i = 0; i < texturesLen; i++) {
+		FString Path = FString::Printf(TEXT("/Game/yangmaterial/0_%d.0_%d"), i+1, i+1);
+		FSoftObjectPath SoftPath(Path);
+		UMaterial* Material = Cast<UMaterial>(SoftPath.TryLoad());
+		if (Material) {
+			// 成功加载材质
+			textures[i] = Material;
+		} else {
+			// 无法加载材质，输出错误信息
+			UE_LOG(LogTemp, Error, TEXT("Failed to load material at path %s"), *Path);
+		}
+	}
 }
 
 // Called when the game starts or when spawned
@@ -68,7 +89,7 @@ bool AGameActor::downExistBox(int layer, int row, int col)
 // cpp文件中定义函数
 void AGameActor::ReStart()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("ReStart")));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("ReStart")));
 	/*FVector SpawnLocation = GetActorLocation();
 	FRotator SpawnRotation = GetActorRotation();
 
@@ -152,7 +173,7 @@ void AGameActor::Tick(float DeltaTime)
 }
 
 void AGameActor::OnClick(ACell* cell) {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("111%d,%d,%d"),cell->row, cell->col,cell->layer));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("111%d,%d,%d"),cell->row, cell->col,cell->layer));
 	UE_LOG(LogTemp,Warning,TEXT("click"));
 
 	if (fail)
@@ -227,22 +248,22 @@ void AGameActor::addCellToBar(ACell* cell) {
 	}
 	if (!added) {
 		cellsOnBar.Add(cell);
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event0")));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event0")));
 		//.ExecuteIfBound();
 		//onaddCellToBar.ExecuteIfBound();
 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event1")));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("event1")));
 	}
 	onaddCellToBar.Broadcast();
 
 	//updateCellOnBar();
 	
-	FString str;
+	/* FString str;
 	for (ACell* var : cellsOnBar)
 	{
 		str.Append(FString::Printf(TEXT("%d,"),var->value));
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, str);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, str); */
 
 
 	if (cellsOnBar.Num() >= 7)
