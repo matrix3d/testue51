@@ -92,7 +92,7 @@ UTexture2D* ACell::GetTextureFromMaterial()
 }
 
 
-UMaterial* ACell::GetMyMaterial()
+/* UMaterial* ACell::GetMyMaterial()
 {
     return mymaterial;
-}
+} */

@@ -56,6 +56,6 @@ public:
 	virtual void setData(int layer, int row, int col,ACell* cell);
 	virtual ACell* getData(int layer, int row, int col);
 	//UPROPERTY(Category = "BPFunc_Lib")
-	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
+	UFUNCTION(BlueprintPure, Category = "BPFunc_Lib")
 	virtual	ACell* GetMycellsOnBar(int i);
 };

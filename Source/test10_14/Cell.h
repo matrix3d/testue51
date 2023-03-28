@@ -32,9 +32,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void setValue(int value,UMaterial* material);
-	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
+	UFUNCTION(BlueprintPure, Category = "BPFunc_Lib")
 	virtual	UTexture2D* GetTextureFromMaterial();
-	UFUNCTION(BlueprintCallable, Category = "BPFunc_Lib")
-	virtual	UMaterial* GetMyMaterial();
 
 };
