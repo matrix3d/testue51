@@ -32,7 +32,6 @@ AGameActor::AGameActor()
 	textures[3] = materialVisualAsset4.Object;
 	static ConstructorHelpers::FObjectFinder<UMaterial> materialVisualAsset5(TEXT("/Game/yangmaterial/0_5.0_5"));
 	textures[4] = materialVisualAsset5.Object;
-	
 }
 
 // Called when the game starts or when spawned
