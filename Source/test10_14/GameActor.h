@@ -17,9 +17,9 @@ public:
 	int texturesLen=5;
 	UMaterial* textures[5];
 	//ACell* cubePrefabs[];
-	int numLayers = 20;
+	int numLayers = 3;
 	int numRows = 10;
-	int numCols = 10;
+	int numCols = 5;
 	//ACell* data[20][10][10];//layer,x,y
 	TArray<ACell*> data;//layer,x,y
 	int count;

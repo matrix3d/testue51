@@ -131,12 +131,12 @@ void AGameActor::ReStart()
 		{
 			for (int k = 0; k < numCols; k++)
 			{
-				if (FMath::SRand() < 0.5f && i % 2 == j % 2 && i % 2 == k % 2 && downExistBox(i, j, k))
+				if (FMath::SRand() < 10.5f && i % 2 == j % 2 && i % 2 == k % 2 && downExistBox(i, j, k))
 				{
 					int size = 1;
 					float sizeL = 1.0f;
 
-					FVector SpawnLocation = FVector(((float)k - numCols / 2) * size, i * sizeL, ((float)j - numRows / 2) * size);
+					FVector SpawnLocation = FVector(((float)j - numRows / 2) * size,((float)k - numCols / 2) * size, i * sizeL);
 					FRotator SpawnRotation = GetActorRotation();
 
 
@@ -184,13 +184,14 @@ void AGameActor::OnClick(ACell* cell) {
 
 	//	OneShotAudio.playOneShot("166384774385063");
 	//	print("onclick" + cell.layer + "," + cell.row + "," + cell.col);
-	setData(cell->row,cell->col,cell->layer,NULL);
+	setData(cell->layer,cell->row,cell->col,NULL);
 	updateAllCell();
 	addCellToBar(cell);
 
 	count--;
 	if (count <= 0 && !fail)
 	{
+		UE_LOG(LogTemp,Warning,TEXT("win"));
 			//print("通关");
 			//ui.Show(true, false);
 	}
@@ -215,7 +216,7 @@ void AGameActor::addCellToBar(ACell* cell) {
 	//cell->Destroy();
 
 	bool added = false;
-	FVector loca=FVector(cellsOnBar.Num(), 0, 0);
+	FVector loca=FVector(0,cellsOnBar.Num()+100, 0);
 	FQuat rot;
 	cell->SetActorLocationAndRotation(loca,rot,false);
 	for (int i = 0; i < cellsOnBar.Num(); i++) {

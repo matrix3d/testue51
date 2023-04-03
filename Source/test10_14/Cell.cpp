@@ -25,7 +25,7 @@ ACell::ACell()
 	{
 		VisualMesh->SetStaticMesh(CubeVisualAsset.Object);
 		VisualMesh->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
-		VisualMesh->SetRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
+		VisualMesh->SetRelativeScale3D(FVector(0.02f, 0.02f, 0.01f));
 	}
 }
 
