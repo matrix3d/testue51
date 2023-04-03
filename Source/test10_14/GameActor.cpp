@@ -173,6 +173,10 @@ void AGameActor::Tick(float DeltaTime)
 }
 
 void AGameActor::OnClick(ACell* cell) {
+	if(!cell->mouseEnabled){
+		return;
+	}
+
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("111%d,%d,%d"),cell->row, cell->col,cell->layer));
 	UE_LOG(LogTemp,Warning,TEXT("click"));
 
@@ -307,6 +311,7 @@ void AGameActor::updateCell(int layer, int row, int col) {
 	if (obj != NULL)
 	{
 		//obj.mouseEnabled = e;
+		obj->setMouseEnabled(e);
 	}
 }
 

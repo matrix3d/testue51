@@ -19,6 +19,7 @@ public:
 		 int row;
 		 int col;
 		int value;
+		bool mouseEnabled=true;
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BPFunc_Lib")
 		UMaterial* mymaterial;
 
@@ -32,6 +33,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void setValue(int value,UMaterial* material);
+	virtual void setMouseEnabled(bool v);
 	UFUNCTION(BlueprintPure, Category = "BPFunc_Lib")
 	virtual	UTexture2D* GetTextureFromMaterial();
 

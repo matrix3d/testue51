@@ -59,7 +59,10 @@ void ACell::setValue(int v,UMaterial* material)
 	//UE_LOG(LogTemp, Warning, TEXT("fdsfd_ %b"), material==NULL);
 	VisualMesh->SetMaterial(0, material);
 }
-
+void ACell::setMouseEnabled(bool v)
+{
+	mouseEnabled=v;
+}
 UTexture2D* ACell::GetTextureFromMaterial()
 {
 	UMaterial* Material = mymaterial; // 指向UMaterial的指针
