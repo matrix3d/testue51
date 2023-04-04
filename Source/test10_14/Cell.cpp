@@ -62,16 +62,17 @@ void ACell::setValue(int v,UMaterial* material)
 void ACell::setMouseEnabled(bool v)
 {
 	mouseEnabled=v;
+
+	/* UMaterialInstanceDynamic* material=(UMaterialInstanceDynamic*)VisualMesh->GetMaterial(0);
+	FLinearColor color=FLinearColor(1.0f, v?1.0f:0.1f,1.0f);
+	material->SetVectorParameterValue(FName(TEXT("BaseColor")),color); */
 }
 UTexture2D* ACell::GetTextureFromMaterial()
 {
-	UMaterial* Material = mymaterial; // 指向UMaterial的指针
-	UTexture2D* Texture = nullptr;
-
 	//Material->GetExpressions
-	for (int i = 0; i < Material->GetExpressions().Num(); i++)
+	for (int i = 0; i < mymaterial->GetExpressions().Num(); i++)
 	{
-		UMaterialExpressionTextureSample* TextureExpression = Cast<UMaterialExpressionTextureSample>(Material->GetExpressions()[i]);
+		UMaterialExpressionTextureSample* TextureExpression = Cast<UMaterialExpressionTextureSample>(mymaterial->GetExpressions()[i]);
 		if (TextureExpression)
 		{
 			return Cast<UTexture2D>(TextureExpression->Texture);

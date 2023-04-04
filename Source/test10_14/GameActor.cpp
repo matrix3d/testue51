@@ -131,7 +131,7 @@ void AGameActor::ReStart()
 		{
 			for (int k = 0; k < numCols; k++)
 			{
-				if (FMath::SRand() < 10.5f && i % 2 == j % 2 && i % 2 == k % 2 && downExistBox(i, j, k))
+				if (FMath::SRand() < 0.5f && i % 2 == j % 2 && i % 2 == k % 2 && downExistBox(i, j, k))
 				{
 					int size = 1;
 					float sizeL = 1.0f;
